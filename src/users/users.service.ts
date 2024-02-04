@@ -9,17 +9,17 @@ export class UsersService {
   constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
 
   async createUser(user: CreateUserDto) {
-    console.log({ user });
+    // console.log({ user, User });
     return await this.userRepo
       .createQueryBuilder()
       .insert()
       .into(User)
-      .values({ ...user, createdAt: new Date() })
+      .values(user)
       .execute();
   }
   // this will return user by email,id,phoneNumber
-  async getUserByUserDetails(criteria: Partial<User>): Promise<User> {
-    const user = await this.userRepo.findOne({ where: criteria });
+  async getUserByUserDetails(details: Partial<User>): Promise<User> {
+    const user = await this.userRepo.findOne({ where: details });
     if (!user) {
       throw new NotFoundException('User not found');
     }
