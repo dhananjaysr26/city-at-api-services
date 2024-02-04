@@ -1,0 +1,3 @@
+[submodule "src/entity-store"]
+	path = src/entity-store
+	url = https://github.com/dhananjaysr26/city-at-entities.git
