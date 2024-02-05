@@ -1,6 +1,12 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/users.dto';
 import { UsersService } from 'src/users/users.service';
+import { SignInUserDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -28,5 +34,23 @@ export class AuthService {
       );
     }
     return this.userService.createUser(payload);
+  }
+
+  async signInUser({ password, phoneCountryCode, phoneNumber }: SignInUserDto) {
+    const user = await this.userService.getUserByUserDetails({
+      phoneCountryCode,
+      phoneNumber,
+    });
+
+    if (!user) {
+      throw new NotFoundException(
+        `User Not Found with phone Number: +${phoneCountryCode}-${phoneNumber}`,
+      );
+    }
+
+    if (user.password !== password) {
+      throw new ForbiddenException(`Invalid User Credentials!`);
+    }
+    return user;
   }
 }
