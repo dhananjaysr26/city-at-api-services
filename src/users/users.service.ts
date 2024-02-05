@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/users.dto';
@@ -10,19 +10,22 @@ export class UsersService {
 
   async createUser(user: CreateUserDto) {
     // console.log({ user, User });
-    return await this.userRepo
-      .createQueryBuilder()
-      .insert()
-      .into(User)
-      .values(user)
-      .execute();
+    try {
+      await this.userRepo
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values(user)
+        .execute();
+      return 'User Created!';
+    } catch (error) {
+      console.error('Error while Creating User', error);
+      throw new HttpException('User Creation Failed!', HttpStatus.FORBIDDEN);
+    }
   }
   // this will return user by email,id,phoneNumber
   async getUserByUserDetails(details: Partial<User>): Promise<User> {
     const user = await this.userRepo.findOne({ where: details });
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
     return user;
   }
 }
