@@ -9,7 +9,7 @@ Entity Store Repo Link: https://github.com/dhananjaysr26/city-at-entities
 ```
  git clone https://github.com/dhananjaysr26/city-at-api-services.git
 ```
-2. get Updated entity store
+2. get Clone & Updated entity store
 ```
 git submodule update --init
 ``` 
