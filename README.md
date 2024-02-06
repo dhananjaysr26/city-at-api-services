@@ -9,6 +9,9 @@ Nextjs,TypeOrm,Postgress,
 ```
 2. get Updated entity store
 ```
+git submodule update --init
+``` 
+```
  git submodule foreach git pull origin main
 ```
 3. install dependency
