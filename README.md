@@ -1,6 +1,8 @@
 # City At Api Services
 Nestjs,TypeOrm,Postgress,JWT,Marvel Api
 
+Entity Store Repo Link: https://github.com/dhananjaysr26/city-at-entities
+
 
 ## Installation
 1.Clone Repo
