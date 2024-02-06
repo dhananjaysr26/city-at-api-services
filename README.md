@@ -1,5 +1,5 @@
 # City At Api Services
-Nextjs,TypeOrm,Postgress,
+Nestjs,TypeOrm,Postgress,JWT,Marvel Api
 
 
 ## Installation
