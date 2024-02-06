@@ -7,10 +7,14 @@ import {
 import { CreateUserDto } from 'src/users/dto/users.dto';
 import { UsersService } from 'src/users/users.service';
 import { SignInUserDto } from './dto/auth.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
   async signupUser(payload: CreateUserDto) {
     const { phoneCountryCode, phoneNumber, email } = payload;
@@ -37,10 +41,11 @@ export class AuthService {
   }
 
   async signInUser({ password, phoneCountryCode, phoneNumber }: SignInUserDto) {
-    const user = await this.userService.getUserByUserDetails({
-      phoneCountryCode,
-      phoneNumber,
-    });
+    const { password: userPassword, ...user } =
+      await this.userService.getUserByUserDetails({
+        phoneCountryCode,
+        phoneNumber,
+      });
 
     if (!user) {
       throw new NotFoundException(
@@ -48,9 +53,17 @@ export class AuthService {
       );
     }
 
-    if (user.password !== password) {
+    if (userPassword !== password) {
       throw new ForbiddenException(`Invalid User Credentials!`);
     }
+    const secretToken = this.jwtService.sign(user);
+    return { user, secretToken };
+  }
+
+  async getAuthUserData(id: number) {
+    const { password, ...user } = await this.userService.getUserByUserDetails({
+      id,
+    });
     return user;
   }
 }
