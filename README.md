@@ -44,7 +44,7 @@ JWT_SECRET="city12345at67890"
 npm run build
 ```
 7. Goto Entity Store and Run the migration for Table Creation && Create .dev.env here as well
-   ```bash
+```bash
 PORT=3010
 
 POSTGRES_HOST="localhost"
@@ -61,6 +61,10 @@ npm run build
 ```
 ```bash
 npm run migration:run
+```
+8. find PostMan Collection at
+```bash
+cd src/__docs/CITY-AT.postman_collection.json
 ```
 ## 🔥 Usefull Commands 🔥
 ```bash
