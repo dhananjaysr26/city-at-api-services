@@ -37,7 +37,29 @@ MARVEL_API_BASE_URL=https://gateway.marvel.com/v1/public
 JWT_SECRET="city12345at67890"
 ```
 5. Create postgress DB with name cityat
+6. Build Api services
+```bash
+npm run build
+```
+7. Goto Entity Store and Run the migration for Table Creation && Create .dev.env here as well
+   ```bash
+PORT=3010
 
+POSTGRES_HOST="localhost"
+POSTGRES_PORT=5432
+POSTGRES_USERNAME=""
+POSTGRES_PASSWORD=""
+POSTGRES_DATABASE="cityat"
+```
+```bash
+cd src/entity-store && npm i
+```
+```bash
+npm run build
+```
+```bash
+npm run migration:run
+```
 ## 🔥 Usefull Commands 🔥
 ```bash
 git submodule add https://github.com/dhananjaysr26/city-at-entities.git ./src/entity-store
