@@ -3,23 +3,23 @@ Nextjs,TypeOrm,Postgress,
 
 
 ## Installation
-1.
+1.Clone Repo
 ```
-$ git clone https://github.com/dhananjaysr26/city-at-api-services.git
+ git clone https://github.com/dhananjaysr26/city-at-api-services.git
 ```
-2.
+2. get Updated entity store
 ```
-$ git submodule foreach git pull origin main
+ git submodule foreach git pull origin main
 ```
-3. 
+3. install dependency
 ```
-$ npm install 
+npm install 
 ```
 
 4. Create .dev.env
 ```
 
-$ PORT=4000
+ PORT=4000
 
 POSTGRES_HOST="localhost"
 POSTGRES_PORT=5432
@@ -40,5 +40,5 @@ JWT_SECRET="city12345at67890"
 git submodule add https://github.com/dhananjaysr26/city-at-entities.git ./src/entity-store
 ```
 ```bash
->git submodule foreach git pull origin main
+git submodule foreach git pull origin main
 ```
