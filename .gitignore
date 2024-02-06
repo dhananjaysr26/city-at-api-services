@@ -36,7 +36,3 @@ lerna-debug.log*
 
 # Ignore all .env files except .dev.env
 *.env
-!/.dev.env
-
-# Include sample.env
-!sample.env
